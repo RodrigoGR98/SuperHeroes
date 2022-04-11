@@ -20,6 +20,8 @@ interface HeroesProviderProps {
 
 interface HeroesContextData {
   heroes: Hero[];
+  getPreviousArray: () => void;
+  searchHero: (search: string) => void;
   nextPage: () => void;
   previousPage: () => void;
   start: number
@@ -33,14 +35,19 @@ export function HeroesProvider({ children }: HeroesProviderProps) {
   const [end, setEnd] = useState(20);
 
   useEffect(() => {
-    getHeroes();
+    getHeroes(start, end);
   }, [])
 
-  function getHeroes(start = 0, end = 20) {
+  function getHeroes(start: number, end: number) {
     var newHeroes: Hero[] = heroesAPI.slice(start, end);
     setHeroes(newHeroes);
   }
 
+  function getPreviousArray() {
+    getHeroes(start, end);
+  }
+
+  //Função responsável por pegar o array da página atual caso o usuário apague o campo de pesquisa de personagens
   function nextPage() {
     getHeroes(start + 20, end + 20);
     setStart(oldProps => oldProps + 20);
@@ -55,8 +62,18 @@ export function HeroesProvider({ children }: HeroesProviderProps) {
     }
   }
 
+  function searchHero(search: string) {
+    console.log(search);
+
+    var heroesArray = heroesAPI.filter(hero => hero.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
+
+    console.log(heroesArray);
+
+    setHeroes(heroesArray);
+  }
+
   return (
-    <HeroesContext.Provider value={{ heroes, nextPage, previousPage, start }}>
+    <HeroesContext.Provider value={{ heroes, getPreviousArray, searchHero, nextPage, previousPage, start }}>
       {children}
     </HeroesContext.Provider >
   )

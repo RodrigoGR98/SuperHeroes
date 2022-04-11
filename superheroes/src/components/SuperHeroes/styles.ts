@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Pagination = styled.div`
   width: 100%;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin: 2.5rem 0;
   display: flex;
   place-content: center;
 
@@ -35,8 +35,30 @@ export const Pagination = styled.div`
 `
 
 export const Heroes = styled.div`
-  padding: 2rem 4rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  .heroes-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .search-input {
+    place-self: end;
+    width: 300px;
+    height: 40px;
+    padding: 0.5rem 0.8rem;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 0.3rem;
+    background: white;
+    color: red;
+
+    ::placeholder { 
+      color: red;
+      opacity: 1; 
+    }
+  }
 `

@@ -7,9 +7,22 @@ import { Container, Pagination, Heroes } from './styles';
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 const SuperHeroes: React.FC = () => {
-  const { heroes, nextPage, previousPage, start } = useContext(HeroesContext);
+  const { heroes, getPreviousArray, searchHero, nextPage, previousPage, start } = useContext(HeroesContext);
 
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const debounce = setTimeout(() => {
+      if (search !== '') {
+        searchHero(search);
+      } else {
+        getPreviousArray();
+      }
+    }, 1000)
+
+    return () => clearTimeout(debounce)
+  }, [search])
 
   //Essa função é responsável por dar um tempo de 2 segundos para as imagens renderizarem a cada troca de página
   function changePage(method: string) {
@@ -26,9 +39,12 @@ const SuperHeroes: React.FC = () => {
     <Container>
       {loading ? <Loading /> :
         <Heroes>
-          {heroes.map(hero => (
-            <SuperHeroCard key={hero.id} hero={hero} />
-          ))}
+          <input className="search-input" type="text" onChange={(e) => { setSearch(e.target.value) }} placeholder="Pesquisar..." />
+          <div className="heroes-list">
+            {heroes.map(hero => (
+              <SuperHeroCard key={hero.id} hero={hero} />
+            ))}
+          </div>
         </Heroes>
       }
       <Pagination>
