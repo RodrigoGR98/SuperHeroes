@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import HeroModal from '../HeroModal';
 
 import { Hero } from '../../heroesContext';
 
@@ -9,11 +10,29 @@ interface SuperHeroCardProps {
 }
 
 const SuperHeroCard: React.FC<SuperHeroCardProps> = ({ hero }: SuperHeroCardProps) => {
+  const [isHeroModalOpen, setIsHeroModalOpen] = useState(false);
+
+  function handleOpenHeroModal() {
+    setIsHeroModalOpen(true);
+  }
+
+  function handleCloseHeroModal() {
+    setIsHeroModalOpen(false);
+  }
+
+
   return (
-    <Container>
-      <img src={hero.images.sm} alt="" />
-      <span>{hero.name}</span>
-    </Container>
+    <>
+      <Container onClick={handleOpenHeroModal}>
+        <img src={hero.images.sm} alt="" />
+        <span>{hero.name}</span>
+      </Container>
+      {isHeroModalOpen && <HeroModal
+        isOpen={isHeroModalOpen}
+        onRequestClose={handleCloseHeroModal}
+        hero={hero}
+      />}
+    </>
   );
 }
 

@@ -67,12 +67,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .react-modal-content {
-    width: 100%;
-    max-width: 576px;
-    background: var(--background);
-    padding: 3rem;
+    padding: 1.5rem;
     position: relative;
     border-radius: 0.25rem;
+    background: linear-gradient(342deg,rgba(36,0,12,1) 0%,rgba(121,9,9,1) 46%,rgba(255,209,0,1) 100%);
+    font-family: 'Poppins', sans-serif;
   }
 
   .react-modal-close {
