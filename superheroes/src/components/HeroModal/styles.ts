@@ -2,6 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+
+  .favorite-button {
+    color: #eb4034;
+    position: absolute;
+    right: 2rem;
+    font-size: 1.8rem;
+  }
 `;
 
 export const Img = styled.img`

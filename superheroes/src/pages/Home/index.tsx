@@ -4,7 +4,8 @@ import Header from '../../components/Header';
 
 import background from '../../assets/background.jpg';
 
-import { Background, Container, Main } from './styles';
+import { Container, Main } from './styles';
+import { Background } from '../../components/Background/styles';
 
 const Home: React.FC = () => {
   return (

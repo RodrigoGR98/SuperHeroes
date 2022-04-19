@@ -5,6 +5,8 @@ import { Hero } from '../../heroesContext';
 
 import { Container, TextContent, Img, PowerStats, Loading } from './styles';
 
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+
 interface ModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
@@ -13,6 +15,17 @@ interface ModalProps {
 
 const HeroModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, hero }: ModalProps) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
+    if (storedHeroes) {
+      let heroFinder = storedHeroes.find((favoriteHero: Hero) => favoriteHero.id === hero.id);
+      if (heroFinder) {
+        setIsFavorite(true);
+      }
+    }
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,6 +43,20 @@ const HeroModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, hero }: Modal
     }
   }
 
+  function handleSetFavorite() {
+    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
+    storedHeroes.push(hero);
+    localStorage.setItem('favoriteHeroes', JSON.stringify(storedHeroes));
+    setIsFavorite(true);
+  }
+
+  function handleRemoveFavorite() {
+    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
+    var newFavoriteHeroesArray = storedHeroes.filter((favoriteHero: Hero) => favoriteHero.id !== hero.id);
+    localStorage.setItem('favoriteHeroes', JSON.stringify(newFavoriteHeroesArray));
+    setIsFavorite(false);
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -38,6 +65,7 @@ const HeroModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, hero }: Modal
       className="react-modal-content"
     >
       <Container>
+        {isFavorite === false ? <AiOutlineHeart className="favorite-button" onClick={handleSetFavorite} /> : <AiFillHeart className="favorite-button" onClick={handleRemoveFavorite} />}
         <Loading>
           <div className="item"></div>
           <div className="item"></div>
