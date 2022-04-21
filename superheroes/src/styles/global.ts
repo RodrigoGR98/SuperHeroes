@@ -72,6 +72,23 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 0.25rem;
     background: linear-gradient(342deg,rgba(36,0,12,1) 0%,rgba(121,9,9,1) 46%,rgba(255,209,0,1) 100%);
     font-family: 'Poppins', sans-serif;
+
+    &.battle {
+      padding: 0;
+      width: 600px;
+      height: 500px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        height: 50px;
+        background-color: black;
+      }
+    }
   }
 
   .react-modal-close {

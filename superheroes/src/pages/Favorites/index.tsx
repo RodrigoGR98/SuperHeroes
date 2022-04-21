@@ -14,7 +14,6 @@ const Favorites: React.FC = () => {
 
   useEffect(() => {
     var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
-    console.log(storedHeroes);
     setFavoriteHeroes(storedHeroes);
   }, [])
 

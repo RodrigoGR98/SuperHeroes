@@ -63,12 +63,7 @@ export function HeroesProvider({ children }: HeroesProviderProps) {
   }
 
   function searchHero(search: string) {
-    console.log(search);
-
     var heroesArray = heroesAPI.filter(hero => hero.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()));
-
-    console.log(heroesArray);
-
     setHeroes(heroesArray);
   }
 

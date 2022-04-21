@@ -29,6 +29,15 @@ export const Main = styled.main`
       font-size: 4rem;
     }
   }
+
+  .button-start {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.25rem;
+    background: linear-gradient(315deg, rgba(255,243,42,1) 0%, rgba(255,206,0,1) 100%);
+    font-size: 1.5rem;
+    margin-top: 3rem;
+  }
 `
 
 export const Fighters = styled.div`
@@ -37,11 +46,27 @@ export const Fighters = styled.div`
   display: flex;
   place-content: space-evenly;
 
+  .character-placeholder {
+    width: 260px;
+    height: 300px;
+    background: linear-gradient(315deg, rgba(255,243,42,1) 0%, rgba(255,206,0,1) 100%);
+    margin-top: 3rem;
+    border-radius: 0.25rem;
+    display: flex;
+    place-content: center;
+    align-items: center;
+
+    svg {
+      font-size: 8rem;
+    }
+  }
+
   button {
     padding: 1rem 2rem;
+    width: 260px;
     border: none;
     border-radius: 0.25rem;
-    background-color: #FFCE00;
+    background: linear-gradient(315deg, rgba(255,243,42,1) 0%, rgba(255,206,0,1) 100%);
     font-size: 1.5rem;
   }
 `
@@ -53,19 +78,64 @@ export const HeroBattle = styled.div`
   display: flex;
   justify-content: center;
 
+  .powerstats {
+    display: flex;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    width: 220px;
+    padding: 1rem;
+    place-content: space-evenly;
+    color: white;
+    flex-direction: column;
+    font-size: 18px;
+    align-items: center;
+
+    .win {
+      margin-left: 0.5rem;
+      color: #41d91e;
+    }
+
+    .draw {
+      margin-left: 0.5rem;
+      color: yellow;
+    }
+
+    .defeat {
+      margin-left: 0.5rem;
+      color: #f01111;
+    }
+
+    &.one {
+      margin-top: 3rem;
+    }
+
+    &.two {
+      margin-bottom: 3rem;
+    }
+
+    .powerstat {
+      margin-bottom: 0.5rem;
+      transition: all 1s;
+      opacity: 0;
+    }
+  }
+
   .sides {
     animation: 0.7s curtain cubic-bezier(.86,0,.07,1) 0.4s both;
     display: grid;
     grid-template-columns: 400px 400px;
     position: relative;
-    height: 500px;
+    height: 680px;
+    margin-top: 3rem;
   }
 
   .side {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1.4rem;
+    position: relative;
   }
 
   .fighter-one {
@@ -121,6 +191,34 @@ export const HeroBattle = styled.div`
     
     100% {
       grid-gap: 0;
+    }
+  }
+`
+
+export const Images = styled.div`
+  height: 240px;
+	position: relative;
+	width: 160px;
+
+  .result {
+    position: absolute;
+    font-size: 70px;
+    z-index: 3;
+    top: 30%;
+    left: 0rem;
+
+    &.win {
+      color: #41d91e;
+      left: -1rem;
+    }
+
+    &.draw {
+      color: yellow;
+    }
+
+    &.defeat {
+      color: #f01111;
+      left: -1rem;
     }
   }
 `
