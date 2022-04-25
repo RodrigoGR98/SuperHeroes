@@ -186,9 +186,6 @@ const Battle: React.FC = () => {
       setOneTotalPower(totalPowerOne);
       setTwoTotalPower(totalPowerTwo);
 
-      console.log(counterCharacterOne, counterCharacterTwo);
-      console.log(totalPowerOne, totalPowerTwo);
-
       let isDraw = false;
       let isOneDefeat = false;
       let isTwoDefeat = false;
@@ -220,7 +217,6 @@ const Battle: React.FC = () => {
   }
 
   function getResultLabels(isDraw: boolean | undefined, isOneDefeat: boolean | undefined, isTwoDefeat: boolean | undefined) {
-    console.log(isOneDefeat, isTwoDefeat);
     if (isDraw === false) {
       if (isOneDefeat === true) {
         setResultOne('Defeat!')

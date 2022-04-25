@@ -18,8 +18,8 @@ const HeroModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, hero }: Modal
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
-    if (storedHeroes) {
+    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '[]');
+    if (Object.keys(storedHeroes).length !== 0) {
       let heroFinder = storedHeroes.find((favoriteHero: Hero) => favoriteHero.id === hero.id);
       if (heroFinder) {
         setIsFavorite(true);
@@ -44,14 +44,16 @@ const HeroModal: React.FC<ModalProps> = ({ isOpen, onRequestClose, hero }: Modal
   }
 
   function handleSetFavorite() {
-    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
+    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '[]');
+    console.log(storedHeroes);
     storedHeroes.push(hero);
     localStorage.setItem('favoriteHeroes', JSON.stringify(storedHeroes));
+
     setIsFavorite(true);
   }
 
   function handleRemoveFavorite() {
-    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '{}');
+    var storedHeroes = JSON.parse(localStorage.getItem("favoriteHeroes") || '[]');
     var newFavoriteHeroesArray = storedHeroes.filter((favoriteHero: Hero) => favoriteHero.id !== hero.id);
     localStorage.setItem('favoriteHeroes', JSON.stringify(newFavoriteHeroesArray));
     setIsFavorite(false);
